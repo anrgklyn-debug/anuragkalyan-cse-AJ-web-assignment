@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A focused student productivity dashboard to plan tasks, manage study sessions, and track goals.">
+  <title>StudySpace | Student Productivity</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="#" aria-label="StudySpace home"><span class="brand-mark">S</span><span>StudySpace<span class="brand-dot">.</span></span></a>
+      <div class="profile-card">
+        <div class="avatar">AK</div>
+        <div><strong>Anurag Kalyan</strong><small>Student workspace</small></div>
+      </div>
+      <p class="nav-label">WORKSPACE</p>
+      <nav class="nav">
+        <a class="nav-item active" href="#overview"><span>◫</span> Overview</a>
+        <a class="nav-item" href="#tasks"><span>✓</span> My tasks</a>
+        <a class="nav-item" href="#focus"><span>◷</span> Focus timer</a>
+        <a class="nav-item" href="#goals"><span>↗</span> Goals</a>
+      </nav>
+      <div class="sidebar-note">
+        <span class="sparkle">✦</span>
+        <strong>Small steps add up.</strong>
+        <p>Show up, focus deeply, and let progress compound.</p>
+      </div>
+      <div class="sidebar-footer"><span class="status-dot"></span> Your progress saves on this device</div>
+    </aside>
+
+    <main class="main-content" id="overview">
+      <header class="topbar">
+        <div><p class="eyebrow" id="today-label">YOUR STUDY SPACE</p><h1>Make today count<span class="heading-dot">.</span></h1><p class="subheading">A little focus today goes a long way tomorrow.</p></div>
+        <button id="theme-toggle" class="icon-button" aria-label="Toggle dark mode" title="Toggle theme">☾</button>
+      </header>
+
+      <section class="welcome-banner">
+        <div class="welcome-copy"><span class="pill"><span class="status-dot"></span> YOUR DAILY DASHBOARD</span><h2>Progress over<br><em>perfection.</em></h2><p>Plan your priorities, protect your focus, and celebrate every win.</p><a href="#tasks" class="banner-link">Plan my day <span>↗</span></a></div>
+        <div class="banner-art" aria-hidden="true"><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="book book-back"></div><div class="book book-front"><span>FOCUS</span><i></i><i></i><i></i></div><div class="sun-shape"></div><div class="star star-a">✦</div><div class="star star-b">✧</div></div>
+      </section>
+
+      <section class="stats-grid" aria-label="Daily statistics">
+        <article class="stat-card"><div class="stat-top"><span>Tasks completed</span><span class="stat-icon mint">✓</span></div><div class="stat-value"><span id="completed-count">0</span><small> / <span id="total-count">0</span></small></div><div class="progress-track"><div class="progress-fill" id="task-progress"></div></div><p class="stat-foot" id="task-progress-label">Your day starts with one task.</p></article>
+        <article class="stat-card"><div class="stat-top"><span>Focus minutes</span><span class="stat-icon lilac">◷</span></div><div class="stat-value"><span id="focus-minutes">0</span><small> min</small></div><p class="stat-foot">Time invested in yourself.</p><div class="mini-bars"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></article>
+        <article class="stat-card"><div class="stat-top"><span>Daily completion</span><span class="stat-icon peach">↗</span></div><div class="stat-value"><span id="completion-rate">0</span><small>%</small></div><p class="stat-foot">Consistency beats intensity.</p><div class="rate-line"><span id="rate-line-fill"></span></div></article>
+      </section>
+
+      <div class="content-grid">
+        <section class="panel tasks-panel" id="tasks">
+          <div class="panel-heading"><div><p class="eyebrow">STAY ON TRACK</p><h2>Today's priorities</h2></div><span class="count-badge" id="task-badge">0 tasks</span></div>
+          <form id="task-form" class="task-form"><label class="sr-only" for="task-input">Add a task</label><input id="task-input" maxlength="100" placeholder="Add a task you want to finish..." required><select id="task-priority" aria-label="Task priority"><option value="High">High</option><option value="Medium" selected>Medium</option><option value="Low">Low</option></select><button class="primary-button" type="submit">+ Add task</button></form>
+          <div class="task-filters" role="group" aria-label="Filter tasks"><button class="filter-button active" data-filter="all">All tasks</button><button class="filter-button" data-filter="active">To do</button><button class="filter-button" data-filter="completed">Completed</button></div>
+          <ul id="task-list" class="task-list"></ul>
+          <div class="empty-state" id="empty-state"><span>✦</span><strong>Clear mind, clear list.</strong><p>Add your first task above and make a start.</p></div>
+        </section>
+
+        <section class="panel focus-panel" id="focus">
+          <div class="panel-heading"><div><p class="eyebrow">DEEP WORK</p><h2>Focus session</h2></div><span class="focus-symbol">◉</span></div>
+          <p class="focus-description">One thing at a time. You have got this.</p>
+          <div class="timer-wrap"><svg class="timer-ring" viewBox="0 0 220 220" aria-label="Focus timer progress"><circle class="timer-track" cx="110" cy="110" r="94"></circle><circle class="timer-progress" id="timer-progress" cx="110" cy="110" r="94"></circle></svg><div class="timer-center"><span class="timer-mode" id="timer-mode">FOCUS TIME</span><strong id="timer-display">25:00</strong><span class="timer-status" id="timer-status">Ready when you are</span></div></div>
+          <div class="timer-modes"><button class="mode-button active" data-minutes="25" data-mode="Focus">Focus 25</button><button class="mode-button" data-minutes="5" data-mode="Break">Short break 5</button><button class="mode-button" data-minutes="15" data-mode="Break">Long break 15</button></div>
+          <div class="timer-actions"><button id="timer-start" class="primary-button">Start focus</button><button id="timer-reset" class="secondary-button">Reset</button></div>
+          <p class="timer-tip">TIP: Put your phone away and silence notifications.</p>
+        </section>
+      </div>
+
+      <section class="panel goals-panel" id="goals">
+        <div class="panel-heading"><div><p class="eyebrow">KEEP GROWING</p><h2>Weekly goals</h2></div><span class="goal-week">THIS WEEK <span>✦</span></span></div>
+        <div class="goals-grid">
+          <label class="goal-item"><span class="goal-check"><input type="checkbox" data-goal="revision"><span>✓</span></span><span class="goal-copy"><strong>Revise key concepts</strong><small>Strengthen what you have learned</small></span><span class="goal-number">01</span></label>
+          <label class="goal-item"><span class="goal-check"><input type="checkbox" data-goal="practice"><span>✓</span></span><span class="goal-copy"><strong>Practice consistently</strong><small>Learn by doing, not just reading</small></span><span class="goal-number">02</span></label>
+          <label class="goal-item"><span class="goal-check"><input type="checkbox" data-goal="rest"><span>✓</span></span><span class="goal-copy"><strong>Make time to recharge</strong><small>Rest is part of the process</small></span><span class="goal-number">03</span></label>
+        </div>
+        <div class="goal-progress-row"><span id="goals-progress-label">0 of 3 goals complete</span><div class="goal-progress"><span id="goals-progress-fill"></span></div></div>
+      </section>
+      <footer class="footer"><span>STUDYSPACE <span class="heading-dot">.</span> BUILT FOR BETTER STUDY DAYS</span><span>Designed by Anurag Kalyan · Student Productivity Project</span></footer>
+    </main>
+  </div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="script.js"></script>
+</body>
+</html>
